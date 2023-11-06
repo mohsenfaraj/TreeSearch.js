@@ -23,9 +23,16 @@ function perform() {
     }
     let startPoint = alphabet.indexOf(fromhtml.value.toUpperCase())
     let endPoint = alphabet.indexOf(tohtml.value.toUpperCase()) ;
+    // check if entered range is available in matrix
+    if (startPoint >= matrix.length || endPoint >= matrix.length){
+        alert("Error! input range is out of matrix bound.")
+        return ;
+    }
+    if (startPoint == -1 || endPoint == -1){
+        alert("Error! enter a valid A-Z value in range fields.")
+    }
     let tree = new Tree(matrix , startPoint , endPoint)
     let answer = tree.search() ;
-    console.log(matrix , startPoint , endPoint)
     if (answer == "failure"){
         resulthtml.innerHTML = "failure"
         return
