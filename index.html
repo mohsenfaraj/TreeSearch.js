@@ -8,15 +8,30 @@
     <title>Tree Search</title>
 </head>
 <body>
+    <h1>TreeSearch.js</h1>
+    <p>please fill the fields below for performing tree search!</p>
     <label for="matrix">Adjacency Matrix</label> <br>
     <textarea name="matrix" id="mat" cols="30" rows="10"></textarea> <br>
     <label for="from">go from</label>
     <input type="text" placeholder="A-Z" id="from"> <br>
     <label for="to">to</label>
     <input type="text" placeholder="A-Z" id="to"> <br>
+    <label for="method">method:</label>
+    <select name="method" id="method">
+        <option value="BFS">BFS</option>
+        <option value="UCS">UCS</option>
+    </select>
+    <br>
     <button id="performbtn">perform search</button>
-    <p id="result"></p>
-    <p>Coded by Mohsen Farajollahi</p>
+    <div>
+        <h3 id="short"></h3>
+        <p>
+            <code id="path"></code>
+        </p>
+        <p>
+            <code id="expand"></code>
+        </p>
+    </div>
 </body>
 <script src="./script.js" type="module"></script>
 </html>

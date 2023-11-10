@@ -5,9 +5,16 @@ let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let fromhtml = document.querySelector("#from")
 let tohtml = document.querySelector("#to")
 let performbtn = document.querySelector("#performbtn")
+let method = document.querySelector("#method");
+let expandHTML = document.querySelector("#expand")
+let pathHTML = document.querySelector("#path")
+let shortHTML = document.querySelector("#short")
 performbtn.addEventListener("click" , () => {perform()})
 
 function perform() {
+    expandHTML.innerHTML = "" ;
+    pathHTML.innerHTML = "" ;
+    
     if(!mathtml.value){
         alert("please enter the adjacency matrix!")
         return;
@@ -31,20 +38,16 @@ function perform() {
     if (startPoint == -1 || endPoint == -1){
         alert("Error! enter a valid A-Z value in range fields.")
     }
-    let tree = new Tree(matrix , startPoint , endPoint)
+    let tree = new Tree(matrix , startPoint , endPoint , method.value)
     let answer = tree.search() ;
     if (answer == "failure"){
-        resulthtml.innerHTML = "failure"
+        path.innerHTML = "failure"
         return
     }
-    let path = "" ;
-    while(answer.parent !== null){
-        if (!path) path = answer.print();
-        else {
-            path = answer.print() + "-->" + path
-        }
-        answer = answer.parent ;
-    }
-    path = answer.print() + "-->" + path ;
-    resulthtml.innerHTML = path ;
+    // solution + expand tree
+    let path = tree.solution(answer)
+    let expandTree = tree.printExpandTree() ;
+    shortHTML.innerHTML = `Cost: ${answer.cost} , Depth: ${answer.depth}`
+    pathHTML.innerHTML = "path: " + path ;
+    expandHTML.innerHTML = "ExpandTree: " + expandTree ;
 }
